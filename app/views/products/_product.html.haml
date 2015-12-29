@@ -1,0 +1,17 @@
+%tr{:id => "product_#{product.id}"}
+  %td= link_to product.id, product_path(product)
+  %td{:id => "product_#{product.id}_name"}= product.name
+  %td{:id => "product_#{product.id}_price"}= number_to_currency product.price, unit: "¥"
+  %td{:id => "product_#{product.id}_description"}= product.description
+  %td= l product.created_at
+  %td
+    = link_to t('.edit', :default => t("helpers.links.edit")),                        |
+      edit_product_path(product), :class => 'btn btn-default btn-xs editProductLink', |
+      remote: true, data: {type: 'json'}                                              |
+    = link_to t('.destroy',                                                                                        |
+      :default => t("helpers.links.destroy")),                                                                     |
+      product,                                                                                                     |
+      :remote => true,                                                                                             |
+      :method => :delete,                                                                                          |
+      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, |
+      :class => 'btn btn-xs btn-danger'                                                                            |
